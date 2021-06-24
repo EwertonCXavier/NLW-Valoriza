@@ -9,7 +9,8 @@ export class CreateTags1624411453794 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "uuid"
+                        type: "uuid",
+                        isPrimary: true
                     },
                     {
                         name: "name",
@@ -26,11 +27,12 @@ export class CreateTags1624411453794 implements MigrationInterface {
                         default: "now()"
                     }
                 ]
-            })
+            }),
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("tags");
     }
 
 }
