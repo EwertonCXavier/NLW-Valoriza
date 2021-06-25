@@ -1,5 +1,8 @@
 import { Entity, PrimaryColumn, CreateDateColumn, UpdateDateColumn, Column } from "typeorm";
+
+import {Expose} from "class-transformer"
 import {v4 as uuid} from "uuid"
+
 
 @Entity("tags")
 class Tag{
@@ -15,6 +18,12 @@ class Tag{
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    //Adição do expose para permitir a inserção de um campo editável (customizável)
+    @Expose({name: "nameCustom"})
+    nameCustom(): string {
+        return `#${this.name}`;
+    }
 
     constructor(){
         if(!this.id){
